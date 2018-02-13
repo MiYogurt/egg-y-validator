@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /**
  * egg-y-validator default config
@@ -9,12 +9,12 @@ exports.validator = {
   open: 'zh-CN',
   languages: {
     'zh-CN': {
-      required: '%s 必填'
-    }
+      required: '%s 必填',
+    },
   },
   async formate(ctx, error) {
-    ctx.type = 'json'
-    ctx.status = 400
-    ctx.body = error
-  }
-}
+    ctx.type = 'json';
+    ctx.status = 400;
+    ctx.body = error;
+  },
+};
