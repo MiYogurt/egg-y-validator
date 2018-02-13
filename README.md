@@ -61,11 +61,13 @@ exports.validator = {
 }
 ```
 
-## create rules
+see [config/config.default.js](config/config.default.js) for more detail.
+
+## Create rules
 
 `app/schemas/login/login.yml`
 
-suport json,js,yaml,toml
+Suport json、js、yaml、toml file.
 
 ```yaml
 name:
@@ -73,7 +75,7 @@ name:
   required: true
 ```
 
-## on your controller
+## Verify on your controller
 
 ```js
 'use strict'
@@ -94,25 +96,28 @@ module.exports = HomeController
 
 ### ctx.verify(path, type)
 
-* path `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
-* type query -> ctx.request.query | body -> ctx.request.body | params -> ctx.params | undefined -> R.merge(this.params, this.request.query, this.request.body)
+* path
+  * `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
+* type
+  * query -> ctx.request.query
+  * body -> ctx.request.body
+  * params -> ctx.params
+  * undefined -> R.merge(this.params, this.request.query, this.request.body)
 
-### ctx.doc -> all rules
+### ctx.doc
+
+all validator rules
 
 ### ctx.loadDocs(reload)
 
 * reload -> boolean true will reload rules file
 
-see [config/config.default.js](config/config.default.js) for more detail.
-
-## Example
-
-<!-- example here -->
-
 ## Questions & Suggestions
 
-Please open an issue [here](https://github.com/eggjs/egg/issues).
+Please open an issue [here](https://github.com/MiYogurt/egg-y-validator/issues).
 
 ## License
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_large)
 
 [MIT](LICENSE)
