@@ -9,12 +9,12 @@
 
 [npm-image]: https://img.shields.io/npm/v/egg-y-validator.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-y-validator
-[travis-image]: https://img.shields.io/travis/eggjs/egg-y-validator.svg?style=flat-square
-[travis-url]: https://travis-ci.org/eggjs/egg-y-validator
-[codecov-image]: https://img.shields.io/codecov/c/github/eggjs/egg-y-validator.svg?style=flat-square
-[codecov-url]: https://codecov.io/github/eggjs/egg-y-validator?branch=master
-[david-image]: https://img.shields.io/david/eggjs/egg-y-validator.svg?style=flat-square
-[david-url]: https://david-dm.org/eggjs/egg-y-validator
+[travis-image]: https://img.shields.io/travis/MiYogurt/egg-y-validator.svg?style=flat-square
+[travis-url]: https://travis-ci.org/MiYogurt/egg-y-validator
+[codecov-image]: https://img.shields.io/codecov/c/github/MiYogurt/egg-y-validator.svg?style=flat-square
+[codecov-url]: https://codecov.io/github/MiYogurt/egg-y-validator?branch=master
+[david-image]: https://img.shields.io/david/MiYogurt/egg-y-validator.svg?style=flat-square
+[david-url]: https://david-dm.org/MiYogurt/egg-y-validator
 [snyk-image]: https://snyk.io/test/npm/egg-y-validator/badge.svg?style=flat-square
 [snyk-url]: https://snyk.io/test/npm/egg-y-validator
 [download-image]: https://img.shields.io/npm/dm/egg-y-validator.svg?style=flat-square
@@ -36,8 +36,8 @@ $ npm i egg-y-validator --save
 // {app_root}/config/plugin.js
 exports.validator = {
   enable: true,
-  package: 'egg-y-validator',
-};
+  package: 'egg-y-validator'
+}
 ```
 
 ## Configuration
@@ -45,20 +45,20 @@ exports.validator = {
 ```js
 // {app_root}/config/config.default.js
 exports.validator = {
-  open: async (ctx) => 'zh-CN',
+  open: async ctx => 'zh-CN',
   // or
   // open: 'zh-CN',
   languages: {
     'zh-CN': {
-      required: '%s 必填',
-    },
+      required: '%s 必填'
+    }
   },
   async formate(ctx, error) {
-    ctx.type = 'json';
-    ctx.status = 400;
-    ctx.body = error;
-  },
-};
+    ctx.type = 'json'
+    ctx.status = 400
+    ctx.body = error
+  }
+}
 ```
 
 ## create rules
@@ -76,19 +76,18 @@ name:
 ## on your controller
 
 ```js
-'use strict';
+'use strict'
 
-const Controller = require('egg').Controller;
+const Controller = require('egg').Controller
 
 class HomeController extends Controller {
   async index() {
-    await this.ctx.verify('login.login', 'query');
-    this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
+    await this.ctx.verify('login.login', 'query')
+    this.ctx.body = 'hi, ' + this.app.plugins.validator.name
   }
 }
 
-module.exports = HomeController;
-
+module.exports = HomeController
 ```
 
 ## api
@@ -96,14 +95,13 @@ module.exports = HomeController;
 ### ctx.verify(path, type)
 
 * path `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
-* type query -> ctx.request.query  | body -> ctx.request.body | params -> ctx.params | undefined -> R.merge(this.params, this.request.query, this.request.body)
-
+* type query -> ctx.request.query | body -> ctx.request.body | params -> ctx.params | undefined -> R.merge(this.params, this.request.query, this.request.body)
 
 ### ctx.doc -> all rules
 
-### ctx.loadDocs(reload) 
+### ctx.loadDocs(reload)
 
-* reload -> boolean  true will reload rules file
+* reload -> boolean true will reload rules file
 
 see [config/config.default.js](config/config.default.js) for more detail.
 
