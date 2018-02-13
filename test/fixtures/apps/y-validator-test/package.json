@@ -1,0 +1,7 @@
+{
+  "name": "y-validator-test",
+  "version": "0.0.1",
+  "dependencies": {
+    "egg-y-validator": "file:../../../.."
+  }
+}
