@@ -11,6 +11,7 @@
     "egg-plugin"
   ],
   "dependencies": {
+    "async-validator": "^1.8.2",
     "camelcase": "^4.1.0",
     "globby": "^8.0.0",
     "m-import": "^1.0.1"
@@ -39,10 +40,10 @@
     "autod": "autod"
   },
   "files": [
+    "index.js",
     "app",
     "config",
-    "app.js",
-    "lib"
+    "app.js"
   ],
   "ci": {
     "version": "8, 9"

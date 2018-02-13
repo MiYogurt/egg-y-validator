@@ -34,7 +34,7 @@ $ npm i egg-y-validator --save
 
 ```js
 // {app_root}/config/plugin.js
-exports.yValidator = {
+exports.validator = {
   enable: true,
   package: 'egg-y-validator',
 };
@@ -44,9 +44,66 @@ exports.yValidator = {
 
 ```js
 // {app_root}/config/config.default.js
-exports.yValidator = {
+exports.validator = {
+  open: async (ctx) => 'zh-CN',
+  // or
+  // open: 'zh-CN',
+  languages: {
+    'zh-CN': {
+      required: '%s 必填',
+    },
+  },
+  async formate(ctx, error) {
+    ctx.type = 'json';
+    ctx.status = 400;
+    ctx.body = error;
+  },
 };
 ```
+
+## create rules
+
+`app/schemas/login/login.yml`
+
+suport json,js,yaml,toml
+
+```yaml
+name:
+  type: 'string'
+  required: true
+```
+
+## on your controller
+
+```js
+'use strict';
+
+const Controller = require('egg').Controller;
+
+class HomeController extends Controller {
+  async index() {
+    await this.ctx.verify('login.login', 'query');
+    this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
+  }
+}
+
+module.exports = HomeController;
+
+```
+
+## api
+
+### ctx.verify(path, type)
+
+* path `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
+* type query -> ctx.request.query  | body -> ctx.request.body | params -> ctx.params | undefined -> R.merge(this.params, this.request.query, this.request.body)
+
+
+### ctx.doc -> all rules
+
+### ctx.loadDocs(reload) 
+
+* reload -> boolean  true will reload rules file
 
 see [config/config.default.js](config/config.default.js) for more detail.
 

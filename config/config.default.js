@@ -6,10 +6,15 @@
  * @property {String} SOME_KEY - some description
  */
 exports.validator = {
-  schemas: {},
+  open: async ctx => 'zh-CN',
   languages: {
     'zh-CN': {
       required: '%s 必填',
     },
+  },
+  async formate(ctx, error) {
+    ctx.type = 'json';
+    ctx.status = 400;
+    ctx.body = error;
   },
 };

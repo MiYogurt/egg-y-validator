@@ -16,8 +16,8 @@ describe('test/y-validator.test.js', () => {
 
   it('should GET /', () => {
     return app.httpRequest()
-      .get('/')
-      .expect('hi, validator')
-      .expect(200);
+      .get('/?ss=some')
+      .expect('[{"message":"name 必填","field":"name"}]')
+      .expect(400);
   });
 });
