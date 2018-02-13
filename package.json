@@ -50,12 +50,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-y-validator.git"
+    "url": "git+https://github.com/MiYogurt/egg-y-validator.git"
   },
   "bugs": {
     "url": "https://github.com/eggjs/egg/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-y-validator#readme",
+  "homepage": "https://github.com/MiYogurt/egg-y-validator.git#readme",
   "author": "yugo",
   "license": "MIT"
 }
