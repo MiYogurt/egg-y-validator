@@ -6,7 +6,9 @@
 [![David deps][david-image]][david-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
+![](https://img.shields.io/badge/license-MIT-000000.svg)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_shield)
+
 
 [npm-image]: https://img.shields.io/npm/v/egg-y-validator.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-y-validator
@@ -124,7 +126,3 @@ Please open an issue [here](https://github.com/MiYogurt/egg-y-validator/issues).
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_large)
 
-[MIT](LICENSE)
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_large)
