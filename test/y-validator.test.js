@@ -14,9 +14,23 @@ describe('test/y-validator.test.js', () => {
   after(() => app.close());
   afterEach(mock.restore);
 
-  it('should GET /', () => {
+  it('test type string', () => {
     return app.httpRequest()
       .get('/?ss=some')
+      .expect('[{"message":"name 必填","field":"name"}]')
+      .expect(400);
+  });
+
+  it('test type object', () => {
+    return app.httpRequest()
+      .get('/a?ss=some')
+      .expect('[{"message":"name 必填","field":"name"}]')
+      .expect(400);
+  });
+
+  it('test type async function', () => {
+    return app.httpRequest()
+      .get('/b?ss=some')
       .expect('[{"message":"name 必填","field":"name"}]')
       .expect(400);
   });

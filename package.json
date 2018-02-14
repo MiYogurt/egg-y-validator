@@ -1,6 +1,6 @@
 {
   "name": "egg-y-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "auto validator",
   "eggPlugin": {
     "name": "validator"
@@ -31,16 +31,16 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
+    "test": "npm run lint-fix && egg-bin pkgfiles && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "ci": "egg-bin pkgfiles --check && npm run lint && npm run cov",
     "pkgfiles": "egg-bin pkgfiles",
     "autod": "autod"
   },
   "files": [
-    "index.js",
     "app",
     "config",
     "app.js"

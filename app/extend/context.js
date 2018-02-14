@@ -29,21 +29,18 @@ module.exports = {
     const paths = glob.sync(matchPath + '/**/*');
 
     const delAllStr = compose(
-      delStr([
-        '.js',
-        '.json',
-        '.toml',
-        '.tml',
-        '.yaml',
-        '.yml',
-      ]),
+      delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
       delStr(app.config.baseDir + '/app/schemas/')
     );
 
     const ForEach = R.tryCatch(path => {
       const content = mi(path);
       path = delAllStr(path).split('/');
-      this[CACHE] = schemas = assocPath(path.map(p => camelCase(p)), content, schemas);
+      this[CACHE] = schemas = assocPath(
+        path.map(p => camelCase(p)),
+        content,
+        schemas
+      );
     }, console.error);
 
     paths.forEach(ForEach);
@@ -59,18 +56,23 @@ module.exports = {
     let open = this.app.config.validator.open;
     if (R.type(open) === 'Function') open = await open(this);
     const messages = this.app.config.validator.languages[open] || {};
-    const rules = R.path(path, this.docs);
+
+    let rules = R.path(path, this.docs);
+    rules = R.defaultTo(rules, R.prop('index', rules));
     const validator = new Validate(rules);
     validator.messages(messages);
-    const fields = R.cond([[
-      R.equals('query'), R.always(this.request.query),
-    ], [
-      R.equals('body'), R.always(this.request.body),
-    ], [
-      R.equals('params'), R.always(this.params),
-    ], [
-      R.T, R.always(R.merge(this.params, this.request.query, this.request.body)),
-    ]])(type);
+
+    const fields = await R.cond([
+      [ compose(R.equals('Object'), R.type), R.always(type) ],
+      [ compose(R.equals('Function'), R.type), type ],
+      [ R.equals('query'), R.always(this.request.query) ],
+      [ R.equals('body'), R.always(this.request.body) ],
+      [ R.equals('params'), R.always(this.params) ],
+      [
+        R.T,
+        R.always(R.merge(this.params, this.request.query, this.request.body)),
+      ],
+    ])(type);
 
     return new Promise((resolve, reject) => {
       validator.validate(fields, errors => {

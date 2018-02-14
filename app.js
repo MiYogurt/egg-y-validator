@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = app => {
-  app.config.appMiddlewares.push('validator');
+  app.config.coreMiddlewares.push('validator');
 };

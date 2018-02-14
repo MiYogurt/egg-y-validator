@@ -98,11 +98,14 @@ module.exports = HomeController
 
 * path
   * `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
+  * `login` -> if login has index propety -> `login.index` -> 'app/schemas/login/index.{json/js/toml/yaml}'
 * type
   * query -> ctx.request.query
   * body -> ctx.request.body
   * params -> ctx.params
   * undefined -> R.merge(this.params, this.request.query, this.request.body)
+  * object -> object
+  * async function -> will be invoke
 
 ### ctx.doc
 

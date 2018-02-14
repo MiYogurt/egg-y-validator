@@ -1,0 +1,6 @@
+{
+  "name": {
+    "required": true,
+    "type": "string"
+  }
+}
