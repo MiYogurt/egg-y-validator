@@ -52,13 +52,43 @@ module.exports = {
   },
 
   async verify(path, type) {
-    path = path.split('.');
     let open = this.app.config.validator.open;
     if (R.type(open) === 'Function') open = await open(this);
     const messages = this.app.config.validator.languages[open] || {};
 
-    let rules = R.path(path, this.docs);
-    rules = R.defaultTo(rules, R.prop('index', rules));
+    let rules;
+
+    const findFunc = obj => {
+
+      const forEach = (value, index) => {
+        if (R.type(value) === 'Array') {
+          findFunc(value);
+        }
+        if (R.type(value) === 'Object' && R.has('validator', value)) {
+          value.validator = value.validator(this);
+        }
+        if (index === 'validator') {
+          obj[index] = obj[index](this);
+        }
+      };
+      if (R.type(obj) === 'Array') {
+        R.forEach(forEach, obj);
+      }
+      if (R.type(obj) === 'Object') {
+        R.forEachObjIndexed(forEach, obj);
+      }
+    };
+
+    if (R.type(path) === 'Object') {
+      rules = path;
+    } else {
+      path = path.split('.');
+      rules = R.path(path, this.docs);
+      rules = R.defaultTo(rules, R.prop('index', rules));
+      findFunc(rules);
+    }
+
+
     const validator = new Validate(rules);
     validator.messages(messages);
 

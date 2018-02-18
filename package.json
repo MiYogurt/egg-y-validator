@@ -14,7 +14,7 @@
     "async-validator": "^1.8.2",
     "camelcase": "^4.1.0",
     "globby": "^8.0.0",
-    "m-import": "^1.0.1"
+    "m-import": "^1.0.2"
   },
   "devDependencies": {
     "autod": "^3.0.0",
@@ -41,6 +41,7 @@
     "autod": "autod"
   },
   "files": [
+    ".autod.conf.js",
     "app",
     "config",
     "app.js"
@@ -57,5 +58,9 @@
   },
   "homepage": "https://github.com/MiYogurt/egg-y-validator.git#readme",
   "author": "yugo",
-  "license": "MIT"
+  "license": "MIT",
+  "main": ".autod.conf.js",
+  "directories": {
+    "test": "test"
+  }
 }

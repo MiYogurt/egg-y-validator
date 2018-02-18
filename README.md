@@ -80,6 +80,91 @@ name:
   required: true
 ```
 
+if you want custom rules，and get context ，but only support js、yal file
+
+```js
+/* eslint-disable */
+'use strict';
+
+module.exports = {
+  name: [
+    {
+      required: true,
+    }, {
+      validator: ctx => async (rule, value, callback, source, options) => {
+        // console.log(ctx);
+        // console.log(rule);
+        // { validator: [Function],
+        // field: 'name',
+        // fullField: 'name',
+        // type: 'string' }
+        // console.log(value);
+        // some
+        // console.log(source);
+        // { name: 'some' }
+        // console.log(options);
+        // { messages:
+        // { default: 'Validation error on field %s',
+        //   required: '%s 必填',
+        //   enum: '%s must be one of %s',
+        //   whitespace: '%s cannot be empty',
+        //   date:
+        //    { format: '%s date %s is invalid for format %s',
+        //      parse: '%s date could not be parsed, %s is invalid ',
+        //      invalid: '%s date %s is invalid' },
+        //   types:
+        //    { string: '%s is not a %s',
+        //      method: '%s is not a %s (function)',
+        //      array: '%s is not an %s',
+        //      object: '%s is not an %s',
+        //      number: '%s is not a %s',
+        //      date: '%s is not a %s',
+        //      boolean: '%s is not a %s',
+        //      integer: '%s is not an %s',
+        //      float: '%s is not a %s',
+        //      regexp: '%s is not a valid %s',
+        //      email: '%s is not a valid %s',
+        //      url: '%s is not a valid %s',
+        //      hex: '%s is not a valid %s' },
+        //   string:
+        //    { len: '%s must be exactly %s characters',
+        //      min: '%s must be at least %s characters',
+        //      max: '%s cannot be longer than %s characters',
+        //      range: '%s must be between %s and %s characters' },
+        //   number:
+        //    { len: '%s must equal %s',
+        //      min: '%s cannot be less than %s',
+        //      max: '%s cannot be greater than %s',
+        //      range: '%s must be between %s and %s' },
+        //   array:
+        //    { len: '%s must be exactly %s in length',
+        //      min: '%s cannot be less than %s in length',
+        //      max: '%s cannot be greater than %s in length',
+        //      range: '%s must be between %s and %s in length' },
+        //   pattern: { mismatch: '%s value %s does not match pattern %s' },
+        //   clone: [Function: clone] } }
+        throw [{field:'name', message:'错误'}]
+      },
+    }],
+};
+```
+
+```yml
+name:
+  - 
+    required: true
+  - 
+    validator: !!js/function >
+      function validator(ctx) {
+        return async function (rule, value, callback, source, options) {
+          throw [{field:'name', message:'错误'}]
+        }
+      }
+
+```
+
+throw error you can use throw or callback
+
 ## Verify on your controller
 
 ```js
@@ -104,6 +189,7 @@ module.exports = HomeController
 * path
   * `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
   * `login` -> if login has index propety -> `login.index` -> 'app/schemas/login/index.{json/js/toml/yaml}'
+  * if path type is object use the object
 * type
   * query -> ctx.request.query
   * body -> ctx.request.body

@@ -34,4 +34,18 @@ describe('test/y-validator.test.js', () => {
       .expect('[{"message":"name 必填","field":"name"}]')
       .expect(400);
   });
+
+  it('test type rules function js', () => {
+    return app.httpRequest()
+      .get('/d?name=some')
+      .expect('[{"field":"name","message":"错误"}]')
+      .expect(400);
+  });
+
+  it('test type rules function by yaml', () => {
+    return app.httpRequest()
+      .get('/f?name=some')
+      .expect('[{"field":"name","message":"错误"}]')
+      .expect(400);
+  });
 });

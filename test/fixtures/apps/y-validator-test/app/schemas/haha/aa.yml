@@ -1,0 +1,11 @@
+name:
+  - 
+    required: true
+  - 
+    validator: !!js/function >
+      function validator(ctx) {
+        return async function (rule, value, callback, source, options) {
+          throw [{field:'name', message:'错误'}]
+        }
+      }
+
