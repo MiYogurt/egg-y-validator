@@ -72,6 +72,8 @@ see [config/config.default.js](config/config.default.js) for more detail.
 
 Suport json、js、yaml、toml file.
 
+all rules you can find in [async-validator](https://github.com/yiminghe/async-validator/blob/e782748f0345b462d84e96a582c0dd38db2de666/__tests__/deep.spec.js)
+
 ```yaml
 name:
   type: 'string'
