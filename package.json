@@ -1,6 +1,6 @@
 {
   "name": "egg-y-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "auto validator",
   "eggPlugin": {
     "name": "validator"
