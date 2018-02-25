@@ -56,7 +56,7 @@ exports.validator = {
       required: '%s 必填'
     }
   },
-  async formate(ctx, error) {
+  async formatter(ctx, error) {
     ctx.type = 'json'
     ctx.status = 400
     ctx.body = error
@@ -174,7 +174,7 @@ const Controller = require('egg').Controller
 
 class HomeController extends Controller {
   async index() {
-    await this.ctx.verify('login.login', 'query')
+    const query = await this.ctx.verify('login.login', 'query')
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name
   }
 }

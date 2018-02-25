@@ -30,9 +30,9 @@ describe('test/y-validator.test.js', () => {
 
   it('test type async function', () => {
     return app.httpRequest()
-      .get('/b?ss=some')
-      .expect('[{"message":"name 必填","field":"name"}]')
-      .expect(400);
+      .get('/b?name=some')
+      .expect('hi, validator')
+      .expect(200);
   });
 
   it('test type rules function js', () => {

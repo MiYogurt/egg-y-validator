@@ -1,6 +1,7 @@
 'use strict';
 
 const Controller = require('egg').Controller;
+const assert = require('power-assert');
 
 class HomeController extends Controller {
   async index() {
@@ -12,13 +13,14 @@ class HomeController extends Controller {
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
   async b() {
-    await this.ctx.verify({
+    const ret = await this.ctx.verify({
       name: {
         required: true,
       },
     }, async () => {
       return this.ctx.query;
     });
+    assert.deepEqual(ret, { name: 'some' });
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
   async d() {
@@ -28,9 +30,10 @@ class HomeController extends Controller {
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
   async f() {
-    await this.ctx.verify('haha.aa', async () => {
+    const ret = await this.ctx.verify('haha.aa', async () => {
       return this.ctx.query;
     });
+    console.log(ret);
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
 }

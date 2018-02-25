@@ -8,7 +8,7 @@ exports.validator = {
       required: '%s 必填',
     },
   },
-  async formate(ctx, error) {
+  async formatter(ctx, error) {
     ctx.type = 'json';
     ctx.status = 400;
     ctx.body = error;

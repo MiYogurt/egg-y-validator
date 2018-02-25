@@ -109,7 +109,7 @@ module.exports = {
         if (errors) {
           reject(errors);
         }
-        resolve();
+        resolve(fields);
       });
     });
   },
