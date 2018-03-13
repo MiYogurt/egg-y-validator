@@ -9,7 +9,6 @@
 ![](https://img.shields.io/badge/license-MIT-000000.svg)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_shield)
 
-
 [npm-image]: https://img.shields.io/npm/v/egg-y-validator.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-y-validator
 [travis-image]: https://img.shields.io/travis/MiYogurt/egg-y-validator.svg?style=flat-square
@@ -40,7 +39,7 @@ $ npm i egg-y-validator --save
 exports.validator = {
   enable: true,
   package: 'egg-y-validator'
-}
+};
 ```
 
 ## Configuration
@@ -57,11 +56,11 @@ exports.validator = {
     }
   },
   async formatter(ctx, error) {
-    ctx.type = 'json'
-    ctx.status = 400
-    ctx.body = error
+    ctx.type = 'json';
+    ctx.status = 400;
+    ctx.body = error;
   }
-}
+};
 ```
 
 see [config/config.default.js](config/config.default.js) for more detail.
@@ -89,8 +88,9 @@ if you want custom rules，and get context ，but only support js、yal file
 module.exports = {
   name: [
     {
-      required: true,
-    }, {
+      required: true
+    },
+    {
       validator: ctx => async (rule, value, callback, source, options) => {
         // console.log(ctx);
         // console.log(rule);
@@ -143,24 +143,24 @@ module.exports = {
         //      range: '%s must be between %s and %s in length' },
         //   pattern: { mismatch: '%s value %s does not match pattern %s' },
         //   clone: [Function: clone] } }
-        throw [{field:'name', message:'错误'}]
-      },
-    }],
+        throw [{ field: 'name', message: '错误' }];
+      }
+    }
+  ]
 };
 ```
 
 ```yml
 name:
-  - 
+  -
     required: true
-  - 
+  -
     validator: !!js/function >
       function validator(ctx) {
         return async function (rule, value, callback, source, options) {
           throw [{field:'name', message:'错误'}]
         }
       }
-
 ```
 
 throw error you can use throw or callback
@@ -168,18 +168,18 @@ throw error you can use throw or callback
 ## Verify on your controller
 
 ```js
-'use strict'
+'use strict';
 
-const Controller = require('egg').Controller
+const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const query = await this.ctx.verify('login.login', 'query')
-    this.ctx.body = 'hi, ' + this.app.plugins.validator.name
+    const query = await this.ctx.verify('login.login', 'query');
+    this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
 }
 
-module.exports = HomeController
+module.exports = HomeController;
 ```
 
 ## api
@@ -210,7 +210,73 @@ all validator rules
 
 Please open an issue [here](https://github.com/MiYogurt/egg-y-validator/issues).
 
+## support superstruct
+
+but superstruct custom type function not support async function
+
+[superstruct api](https://github.com/ianstormtaylor/superstruct/blob/master/docs/reference.md#types)
+
+more info you can see the test file example.
+
+### config.default.js
+
+```js
+exports.validator = {
+  superstruct: true,
+  types(ctx) {
+    // custom you types not support async
+    return {
+      email: v => true
+    };
+  },
+  async formatter(ctx, error) {
+    const { data, path, value } = error;
+    console.log(error);
+    ctx.type = 'json';
+    ctx.status = 400;
+    ctx.body = { field: path[0], message: '无效的值' };
+    console.log(ctx.body);
+  }
+};
+```
+
+### controller
+
+```js
+  async b() {
+    const ret = await this.ctx.verify(
+      { // rules
+        name: 'string'
+      },
+      async () => { // data
+        return this.ctx.query;
+      }
+    );
+    this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
+  }
+  async d() {
+    await this.ctx.verify('haha', async () => {
+      return { name: '123', email: 'ck123.com' };
+    });
+    this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
+  }
+```
+
+### rules
+
+```js
+module.exports = {
+  name: 'string',
+  email: 'email',
+  types: {
+    email: v => {
+      console.log('email verify');
+      return Boolean(v.indexOf('@') != -1);
+    }
+  }
+};
+```
+
 ## License
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMiYogurt%2Fegg-y-validator?ref=badge_large)
-

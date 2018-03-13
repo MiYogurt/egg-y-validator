@@ -15,20 +15,17 @@ class HomeController extends Controller {
   async b() {
     const ret = await this.ctx.verify(
       {
-        name: {
-          required: true,
-        },
+        name: 'string'
       },
       async () => {
         return this.ctx.query;
       }
     );
-    assert.deepEqual(ret, { name: 'some' });
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
   async d() {
     await this.ctx.verify('haha', async () => {
-      return this.ctx.query;
+      return { name: '123', email: 'ck123.com' };
     });
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }

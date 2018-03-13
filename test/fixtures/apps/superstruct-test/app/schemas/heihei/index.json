@@ -1,0 +1,7 @@
+{
+  "id": "string",
+  "title": "string",
+  "is_published": "boolean?",
+  "tags": "string",
+  "author": "string"
+}

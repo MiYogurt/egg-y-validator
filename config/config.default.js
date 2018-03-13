@@ -12,6 +12,8 @@ exports.validator = {
       required: '%s 必填',
     },
   },
+  superstruct: false,
+  types() {},
   async formatter(ctx, error) {
     ctx.status = 400;
     ctx.body = error[0].message;
