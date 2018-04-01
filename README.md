@@ -26,6 +26,8 @@
 Description here.
 -->
 
+[中文文档](https://github.com/MiYogurt/egg-y-validator/blob/master/README.zh_CN.md)
+
 ## Install
 
 ```bash
