@@ -1,6 +1,6 @@
 'use strict';
 const Validate = require('async-validator');
-const { resolve } = require('path');
+const { resolve, sep: s } = require('path');
 const glob = require('fast-glob');
 const mi = require('m-import').default;
 const R = require('ramda');
@@ -54,7 +54,7 @@ module.exports = {
 
     const delAllStr = compose(
       delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
-      delStr(app.config.baseDir + '/app/schemas/')
+      delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
     );
 
     const ForEach = R.tryCatch(path => {

@@ -1,11 +1,29 @@
 sudo: false
 language: node_js
 node_js:
+<<<<<<< HEAD
   - '8'
   - '9'
+=======
+- '9'
+- '8'
+>>>>>>> ad04ab6587144ef7d7e884f7478b9ebb6a2d5d61
 install:
-  - npm i npminstall && npminstall
+- npm i npminstall && npminstall
 script:
-  - npm run ci
+- npm run ci
 after_script:
+<<<<<<< HEAD
   - npminstall codecov && codecov
+=======
+- npminstall codecov && codecov
+deploy:
+  provider: npm
+  email: belovedyogurt@gmail.com
+  api_key:
+    secure: v80yaHT76Pb5cywOmxpCp0tJryBqX+CswuB2hftv2ydalo3/3ojXzCdSJ6THXFXg8rVN/Jc+IamXOZurDF6lRG9kM5eLPwV8OH44j0IPr9C/ZTXFpXQKKQ35Sr77djPDNwLSUKrnJygYk0a/Ls7VpyJ1J1r/PY+5GtM3sSAokLH08DU1dEPxRk2aGV/HD7ek8TGgjCK+YBomp5I/XYNbBWgEMCpmG4FUSj1OqdDBBzmRS02FMLwBJcXT2zk2LC0V0ifmjxX3Tci6GxBPo7gl+5gwAcXwaK/QvQ6Tiy9xFd6v5STp3q1OSjtLwskYut/XW/+9an1PDQQ/bSWYc/xm+Bu+wAxC44ALFnF1CsCl1b4SrWCoxNiLE+RANRhyiZd9WmKVmzRNTRd4lql16DRvijjqCtqKCFl9lqLMwKreUJm5cYlTC3o2mKc9FZozlWax0luf5rw+58/95rQIP5Qymr8Fj08XTGAYUta3B2oyJ0kqf0LkCzD2dINR+Ofqyp4uNMmiqxzVqLm6ZJfnZWILnxb0Lqj7/v7uH42lSUleTisSDMbaUr0uv3et25LZsV1M12uXEuBa3CHdUff9hgYgds5smi75ktVEdxBRCt+9zjbtrFtTPNCbij3tv2lRjBOsggEhGL/seaUGItnbsSI/p7ReAq0TDcY+mKjLdQcq53w=
+  on:
+    branch: master
+    tags: true
+    repo: MiYogurt/egg-y-validator
+>>>>>>> ad04ab6587144ef7d7e884f7478b9ebb6a2d5d61
