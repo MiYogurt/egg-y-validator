@@ -8,27 +8,31 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": ["egg", "eggPlugin", "egg-plugin"],
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin"
+  ],
   "dependencies": {
     "async-validator": "^1.8.2",
-    "camelcase": "^4.1.0",
+    "camelcase": "^5.0.0",
     "debug": "^3.1.0",
     "depd": "^1.1.2",
-    "fast-glob": "^2.2.0",
+    "fast-glob": "^2.2.2",
     "m-import": "^1.0.2",
-    "superstruct": "^0.5.1"
+    "superstruct": "^0.5.4"
   },
   "devDependencies": {
     "autod": "^3.0.0",
     "autod-egg": "^1.0.0",
-    "conventional-changelog-eslint": "^1.0.5",
-    "egg": "^2.0.0",
-    "egg-bin": "^4.3.0",
+    "conventional-changelog-eslint": "^2.0.0",
+    "egg": "^2.8.1",
+    "egg-bin": "^4.7.0",
     "egg-ci": "^1.8.0",
-    "egg-mock": "^3.13.0",
-    "eslint": "^4.11.0",
-    "eslint-config-egg": "^5.1.0",
-    "np": "^2.20.1"
+    "egg-mock": "^3.17.2",
+    "eslint": "^4.19.1",
+    "eslint-config-egg": "^7.0.0",
+    "np": "^3.0.4"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -44,7 +48,12 @@
     "autod": "autod",
     "release": "np"
   },
-  "files": [".autod.conf.js", "app", "config", "app.js"],
+  "files": [
+    ".autod.conf.js",
+    "app",
+    "config",
+    "app.js"
+  ],
   "ci": {
     "version": "8, 9"
   },
@@ -67,7 +76,11 @@
         }
       ],
       "parserOpts": {
-        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
+        "noteKeywords": [
+          "BREAKING CHANGE",
+          "BREAKING CHANGES",
+          "BREAKING"
+        ]
       }
     }
   },

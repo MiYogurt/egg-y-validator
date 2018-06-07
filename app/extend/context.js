@@ -49,8 +49,8 @@ module.exports = {
     const { app } = this;
     let schemas = {};
 
-    const matchPath = resolve(app.config.baseDir, 'app', 'schemas');
-    const paths = glob.sync(matchPath + '/**/*');
+    const matchPath = resolve(app.config.baseDir, 'app', 'schemas', '**', '*');
+    const paths = glob.sync(matchPath);
 
     const delAllStr = compose(
       delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
