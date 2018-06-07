@@ -1,6 +1,6 @@
 {
   "name": "egg-y-validator",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "description": "auto validator",
   "eggPlugin": {
     "name": "validator"
@@ -8,11 +8,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "egg",
-    "eggPlugin",
-    "egg-plugin"
-  ],
+  "keywords": ["egg", "eggPlugin", "egg-plugin"],
   "dependencies": {
     "async-validator": "^1.8.2",
     "camelcase": "^5.0.0",
@@ -48,12 +44,7 @@
     "autod": "autod",
     "release": "np"
   },
-  "files": [
-    ".autod.conf.js",
-    "app",
-    "config",
-    "app.js"
-  ],
+  "files": [".autod.conf.js", "app", "config", "app.js"],
   "ci": {
     "version": "8, 9"
   },
@@ -76,11 +67,7 @@
         }
       ],
       "parserOpts": {
-        "noteKeywords": [
-          "BREAKING CHANGE",
-          "BREAKING CHANGES",
-          "BREAKING"
-        ]
+        "noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
       }
     }
   },
