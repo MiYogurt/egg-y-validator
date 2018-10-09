@@ -53,7 +53,7 @@ module.exports = {
     const paths = glob.sync(matchPath);
 
     const delAllStr = compose(
-      delStr(['.json', '.js', '.toml', '.tml', '.yaml', '.yml']),
+      delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
       delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
     );
 
@@ -80,15 +80,15 @@ module.exports = {
       return await type();
     }
     return R.cond([
-      [compose(R.equals('Object'), R.type), R.always(type)],
-      [compose(R.equals('Function'), R.type), type],
-      [R.equals('query'), R.always(this.request.query)],
-      [R.equals('body'), R.always(this.request.body)],
-      [R.equals('params'), R.always(this.params)],
+      [ compose(R.equals('Object'), R.type), R.always(type) ],
+      [ compose(R.equals('Function'), R.type), type ],
+      [ R.equals('query'), R.always(this.request.query) ],
+      [ R.equals('body'), R.always(this.request.body) ],
+      [ R.equals('params'), R.always(this.params) ],
       [
         R.T,
-        R.always(R.merge(this.params, this.request.query, this.request.body))
-      ]
+        R.always(R.merge(this.params, this.request.query, this.request.body)),
+      ],
     ])(type);
   },
   //* 拿到验证规则
@@ -110,7 +110,7 @@ module.exports = {
       const { superstruct } = require('superstruct');
       const types = R.defaultTo({}, this.app.config.validator.types(this));
       const struct = superstruct({
-        types: R.merge(types, config.types)
+        types: R.merge(types, config.types),
       });
       delete config.types;
       const validator = struct(config);
@@ -122,7 +122,7 @@ module.exports = {
           } catch (e) {
             fn(e);
           }
-        }
+        },
       };
     }
     let open = this.app.config.validator.open;
@@ -148,5 +148,5 @@ module.exports = {
         resolve(fields);
       });
     });
-  }
+  },
 };
