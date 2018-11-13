@@ -5,6 +5,7 @@ const glob = require('fast-glob');
 const mi = require('m-import').default;
 const R = require('ramda');
 const camelCase = require('camelcase');
+const clone = require('clone');
 
 const debug = require('debug')('egg-y-validator');
 
@@ -53,7 +54,7 @@ module.exports = {
     const paths = glob.sync(matchPath);
 
     const delAllStr = compose(
-      delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
+      delStr(['.json', '.js', '.toml', '.tml', '.yaml', '.yml']),
       delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
     );
 
@@ -80,11 +81,11 @@ module.exports = {
       return await type();
     }
     return R.cond([
-      [ compose(R.equals('Object'), R.type), R.always(type) ],
-      [ compose(R.equals('Function'), R.type), type ],
-      [ R.equals('query'), R.always(this.request.query) ],
-      [ R.equals('body'), R.always(this.request.body) ],
-      [ R.equals('params'), R.always(this.params) ],
+      [compose(R.equals('Object'), R.type), R.always(type)],
+      [compose(R.equals('Function'), R.type), type],
+      [R.equals('query'), R.always(this.request.query)],
+      [R.equals('body'), R.always(this.request.body)],
+      [R.equals('params'), R.always(this.params)],
       [
         R.T,
         R.always(R.merge(this.params, this.request.query, this.request.body)),
@@ -100,6 +101,7 @@ module.exports = {
       path = path.split('.');
       rules = R.path(path, this.docs);
       rules = R.defaultTo(rules, R.prop('index', rules));
+      rules = clone(rules)
       invokeFn(rules, this);
     }
     return rules;

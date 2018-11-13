@@ -1,6 +1,6 @@
 {
   "name": "egg-y-validator",
-  "version": "1.1.7",
+  "version": "1.2.0",
   "description": "auto validator",
   "eggPlugin": {
     "name": "validator"
@@ -16,6 +16,7 @@
   "dependencies": {
     "async-validator": "^1.8.2",
     "camelcase": "^5.0.0",
+    "clone": "^2.1.2",
     "debug": "^4.1.0",
     "depd": "^1.1.2",
     "fast-glob": "^2.2.2",
