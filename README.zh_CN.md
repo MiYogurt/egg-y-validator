@@ -198,7 +198,7 @@ module.exports = HomeController;
   * object -> object
   * async function -> // 会调用你的 async 方法获取
 
-### ctx.doc
+### ctx.docs
 
 所有的规则在这里
 
