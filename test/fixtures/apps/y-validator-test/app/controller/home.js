@@ -10,6 +10,7 @@ class HomeController extends Controller {
   }
   async a() {
     await this.ctx.verify('heihei', this.ctx.query);
+    console.log(this.ctx.docs);
     this.ctx.body = 'hi, ' + this.app.plugins.validator.name;
   }
   async b() {

@@ -54,8 +54,13 @@ module.exports = {
     const paths = glob.sync(matchPath);
 
     const delAllStr = compose(
-      delStr(['.json', '.js', '.toml', '.tml', '.yaml', '.yml']),
-      delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
+      delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
+      v => {
+        const end = `${s}app${s}schemas${s}`;
+        const delEndIndex = v.indexOf(end) + end.length;
+        return v.substr(delEndIndex);
+      }
+      // delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
     );
 
     const ForEach = R.tryCatch(path => {
@@ -81,11 +86,11 @@ module.exports = {
       return await type();
     }
     return R.cond([
-      [compose(R.equals('Object'), R.type), R.always(type)],
-      [compose(R.equals('Function'), R.type), type],
-      [R.equals('query'), R.always(this.request.query)],
-      [R.equals('body'), R.always(this.request.body)],
-      [R.equals('params'), R.always(this.params)],
+      [ compose(R.equals('Object'), R.type), R.always(type) ],
+      [ compose(R.equals('Function'), R.type), type ],
+      [ R.equals('query'), R.always(this.request.query) ],
+      [ R.equals('body'), R.always(this.request.body) ],
+      [ R.equals('params'), R.always(this.params) ],
       [
         R.T,
         R.always(R.merge(this.params, this.request.query, this.request.body)),
@@ -101,7 +106,7 @@ module.exports = {
       path = path.split('.');
       rules = R.path(path, this.docs);
       rules = R.defaultTo(rules, R.prop('index', rules));
-      rules = clone(rules)
+      rules = clone(rules);
       invokeFn(rules, this);
     }
     return rules;
