@@ -200,7 +200,7 @@ module.exports = HomeController;
   * object -> object
   * async function -> will be invoke
 
-### ctx.doc
+### ctx.docs
 
 all validator rules
 
