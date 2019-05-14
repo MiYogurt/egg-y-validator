@@ -56,16 +56,19 @@ module.exports = {
     const delAllStr = compose(
       delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
       v => {
-        const end = `${s}app${s}schemas${s}`;
-        const delEndIndex = v.indexOf(end) + end.length;
-        return v.substr(delEndIndex);
+        return v.replace(/.*(\/|\\)schemas(\/|\\)/ig, '');
       }
       // delStr(app.config.baseDir + `${s}app${s}schemas${s}`)
     );
 
     const ForEach = R.tryCatch(path => {
       const content = mi(path);
-      path = delAllStr(path).split(s);
+      path = delAllStr(path);
+      if (path.indexOf(s) === -1 && s !== '/') {
+        path = path.split('/');
+      } else {
+        path = path.split(s);
+      }
       this[CACHE] = schemas = assocPath(
         path.map(p => camelCase(p)),
         content,
