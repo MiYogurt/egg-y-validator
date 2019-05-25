@@ -186,17 +186,20 @@ module.exports = HomeController;
 
 ### ctx.verify(path, type)
 
-* path 验证的规则
-  * `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}'
-  * `login` -> 假如这个 login 下面有 index -> `login.index` -> 'app/schemas/login/index.{json/js/toml/yaml}'
-  * 假如 path 是一个 object 会直接使用这个 object
+* path 验证的规则 
+
+  * `login.login` -> 'app/schemas/login/login.{json/js/toml/yaml}' 
+  * `login` -> 假如这个 login 下面有 index -> `login.index` -> 'app/schemas/login/index.{json/js/toml/yaml}' 
+  * 假如 path 是一个 object 会直接使用这个 object 
+
 * type 验证的对象
-  * query -> ctx.request.query
-  * body -> ctx.request.body
-  * params -> ctx.params
-  * undefined -> R.merge(this.params, this.request.query, this.request.body) // 不传会自动 merge 这几个对象
-  * object -> object
-  * async function -> // 会调用你的 async 方法获取
+
+  * query -> ctx.request.query 
+  * body -> ctx.request.body 
+  * params -> ctx.params 
+  * undefined -> R.merge(this.params, this.request.query, this.request.body) // 不传会自动 merge 这几个对象 
+  * object -> object 
+  * async function -> // 会调用你的 async 方法获取 
 
 ### ctx.docs
 
