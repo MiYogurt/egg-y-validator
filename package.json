@@ -1,6 +1,6 @@
 {
   "name": "egg-y-validator",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "auto validator",
   "eggPlugin": {
     "name": "validator"
@@ -14,13 +14,14 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "async-validator": "^1.8.2",
+    "async-validator": "^2.0.1",
     "camelcase": "^5.0.0",
     "clone": "^2.1.2",
     "debug": "^4.1.0",
-    "depd": "^1.1.2",
-    "fast-glob": "^2.2.2",
+    "depd": "^2.0.0",
+    "fast-glob": "^3.0.4",
     "m-import": "^1.0.2",
+    "slash": "^3.0.0",
     "superstruct": "^0.6.0"
   },
   "devDependencies": {
@@ -31,9 +32,9 @@
     "egg-bin": "^4.7.0",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.17.2",
-    "eslint": "^5.6.1",
+    "eslint": "^6.1.0",
     "eslint-config-egg": "^7.0.0",
-    "np": "^3.0.4"
+    "np": "^5.0.3"
   },
   "engines": {
     "node": ">=8.0.0"

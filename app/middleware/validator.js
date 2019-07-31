@@ -12,11 +12,11 @@ module.exports = options => {
         fn = options.formate;
       }
       try {
-        await next();
+        return await next();
       } catch (e) {
         return await fn(ctx, e);
       }
     }
-    return next;
+    return next();
   };
 };

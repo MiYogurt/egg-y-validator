@@ -1,11 +1,12 @@
 'use strict';
-const Validate = require('async-validator');
+const Validate = require('async-validator').default;
 const { resolve, sep: s } = require('path');
 const glob = require('fast-glob');
 const mi = require('m-import').default;
 const R = require('ramda');
 const camelCase = require('camelcase');
 const clone = require('clone');
+const slash = require('slash');
 
 const debug = require('debug')('egg-y-validator');
 
@@ -49,9 +50,8 @@ module.exports = {
     }
     const { app } = this;
     let schemas = {};
-
     const matchPath = resolve(app.config.baseDir, 'app', 'schemas', '**', '*');
-    const paths = glob.sync(matchPath);
+    const paths = glob.sync(slash(matchPath));
 
     const delAllStr = compose(
       delStr([ '.json', '.js', '.toml', '.tml', '.yaml', '.yml' ]),
