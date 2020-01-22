@@ -22,7 +22,7 @@
     "fast-glob": "^3.0.4",
     "m-import": "^1.0.2",
     "slash": "^3.0.0",
-    "superstruct": "^0.6.0"
+    "superstruct": "^0.8.0"
   },
   "devDependencies": {
     "autod": "^3.0.0",
